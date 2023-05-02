@@ -18,3 +18,9 @@ jobs:
           sudo apt-get update
           sudo apt install snapd
           sudo snap install drawio
+          
+      - name: Generate PNG from draw.io file
+        run: |
+          /usr/bin/Xvfb :1 -screen 0 1024x768x24 -ac +extension GLX +render -noreset &
+          export DISPLAY=:1
+          draw.io -x -f png -o mockup.png mockup.drawio
