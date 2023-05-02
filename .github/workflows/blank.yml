@@ -14,6 +14,8 @@ jobs:
         curl -L https://github.com/jgraph/drawio-desktop/releases/download/v14.6.16/drawio-x64-14.6.16.AppImage -o drawio
         chmod +x drawio
         sudo mv drawio /usr/local/bin/drawio
+    - name: Add /usr/local/bin to PATH
+      run: echo "::add-path::/usr/local/bin"
     - name: Generate image
       run: drawio -x -f png -o mockup.png mockup.drawio
     - name: Commit generated image
