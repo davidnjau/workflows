@@ -16,6 +16,4 @@ jobs:
       - name: Install draw.io
         run: |
           sudo apt-get update
-          sudo apt-get install -y xvfb libgtk-3-0 libasound2 libxss1 libxtst6 libnss3 x11-xkb-utils xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic
-          wget https://github.com/jgraph/drawio-desktop/releases/download/v15.4.4/draw.io-amd64-15.4.4.deb
-          sudo dpkg -i draw.io-amd64-15.4.4.deb
+          sudo snap install drawio
