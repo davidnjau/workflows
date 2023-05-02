@@ -16,4 +16,5 @@ jobs:
       - name: Install draw.io
         run: |
           sudo apt-get update
+          sudo apt install snapd
           sudo snap install drawio
