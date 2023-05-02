@@ -18,8 +18,10 @@ jobs:
           sudo apt-get update
           sudo apt install snapd
           sudo snap install drawio
-          echo "::add-path::$(find /snap/drawio -name 'current/bin')"
-          
+
+      - name: Set PATH
+        run: echo "PATH=$PATH:/snap/bin" >> $GITHUB_ENV
+
       - name: Generate PNG from draw.io file
         run: |
           /usr/bin/Xvfb :1 -screen 0 1024x768x24 -ac +extension GLX +render -noreset &
