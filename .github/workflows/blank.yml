@@ -1,0 +1,22 @@
+name: Generate Image
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install drawio-cli
+      run: npm install -g drawio-cli
+    - name: Generate image
+      run: drawio -x -f png -o mockup.png mockup.drawio
+    - name: Commit generated image
+      uses: EndBug/add-and-commit@v7
+      with:
+        author_name: ${{ github.event.head_commit.author.name }}
+        author_email: ${{ github.event.head_commit.author.email }}
+        message: "Add generated image for commit: ${{ github.event.head_commit.message }}"
+        add: '*.png'
