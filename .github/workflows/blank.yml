@@ -1,31 +1,21 @@
-name: Generate PNG from drawio
+name: Draw.io Export
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
-  generate_png:
+  export:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0  # Ensure we get the full commit history
 
-      - name: Install drawio-cli
+      - name: Install draw.io
         run: |
-          sudo wget https://github.com/jgraph/drawio-desktop/releases/download/v14.8.5/drawio-14.8.5-amd64.deb
-          sudo dpkg -i drawio-14.8.5-amd64.deb
-
-      - name: Generate PNG
-        run: |
-          drawio -x -f png -o ${{ secrets.FILENAME }} ${{ github.workspace }}/mockup.drawio
-
-      - name: Commit PNG
-        uses: EndBug/add-and-commit@v7
-        with:
-          author_name: ${{ github.event.head_commit.author.name }}
-          author_email: ${{ github.event.head_commit.author.email }}
-          message: "Add PNG for ${{ github.event.head_commit.message }}"
-          add: ${{ secrets.FILENAME }}
+          sudo apt-get update
+          sudo apt-get install -y xvfb libgtk-3-0 libasound2 libxss1 libxtst6 libnss3 x11-xkb-utils xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic
+          wget https://github.com/jgraph/drawio-desktop/releases/download/v15.4.4/draw.io-amd64-15.4.4.deb
+          sudo dpkg -i draw.io-amd64-15.4.4.deb
