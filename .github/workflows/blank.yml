@@ -10,7 +10,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install drawio-cli
-      run: npm install -g drawio-cli
+      run: |
+        curl -L https://github.com/jgraph/drawio-desktop/releases/download/v14.6.16/drawio-x64-14.6.16.AppImage -o drawio
+        chmod +x drawio
+        sudo mv drawio /usr/local/bin/drawio
     - name: Generate image
       run: drawio -x -f png -o mockup.png mockup.drawio
     - name: Commit generated image
